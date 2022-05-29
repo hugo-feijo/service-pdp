@@ -1,6 +1,7 @@
 package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "RESTAURANT_UNITY")
@@ -51,5 +52,18 @@ public class RestaurantUnity implements java.io.Serializable{
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestaurantUnity that = (RestaurantUnity) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

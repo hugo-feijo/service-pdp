@@ -31,7 +31,7 @@ public class OrderPadService {
 
     public OrderPad createOrderPad(Integer tableId) {
         var orderPad = new OrderPad();
-        orderPad.setTable(restaurantTableService.findById(tableId));
+        orderPad.setRestaurantTable(restaurantTableService.findById(tableId));
         orderPadDAO.create(orderPad);
         return orderPad;
     }

@@ -3,6 +3,7 @@ package com.pdp.servicepdp.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class OrderPad implements java.io.Serializable{
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_restaurant_table", nullable = false, referencedColumnName = "id")
-    private RestaurantTable table;
+    private RestaurantTable restaurantTable;
 
     @OneToMany(mappedBy = "orderPad")
     private Set<Client> clients;
@@ -29,15 +30,15 @@ public class OrderPad implements java.io.Serializable{
     public OrderPad() {
         this.setId(0);
         this.setOpenAt(LocalDateTime.now());
-        this.setTable(null);
+        this.setRestaurantTable(null);
         this.setClients(new HashSet<>());
     }
 
-    public OrderPad(int id, LocalDateTime openAt, LocalDateTime closedAt, RestaurantTable table, Set<Client> clients) {
+    public OrderPad(int id, LocalDateTime openAt, LocalDateTime closedAt, RestaurantTable restaurantTable, Set<Client> clients) {
         this.id = id;
         this.openAt = openAt;
         this.closedAt = closedAt;
-        this.table = table;
+        this.restaurantTable = restaurantTable;
         this.clients = clients;
     }
 
@@ -65,12 +66,12 @@ public class OrderPad implements java.io.Serializable{
         this.closedAt = closedAt;
     }
 
-    public RestaurantTable getTable() {
-        return table;
+    public RestaurantTable getRestaurantTable() {
+        return restaurantTable;
     }
 
-    public void setTable(RestaurantTable table) {
-        this.table = table;
+    public void setRestaurantTable(RestaurantTable restaurantTable) {
+        this.restaurantTable = restaurantTable;
     }
 
     public Set<Client> getClients() {
@@ -79,5 +80,18 @@ public class OrderPad implements java.io.Serializable{
 
     public void setClients(Set<Client> clients) {
         this.clients = clients;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderPad orderPad = (OrderPad) o;
+        return id == orderPad.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

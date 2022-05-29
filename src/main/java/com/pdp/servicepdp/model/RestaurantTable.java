@@ -1,10 +1,11 @@
 package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "RESTAURANT_TABLE")
-public class RestaurantTable {
+public class RestaurantTable implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
@@ -51,5 +52,18 @@ public class RestaurantTable {
 
     public void setRestaurantUnity(RestaurantUnity restaurantUnity) {
         this.restaurantUnity = restaurantUnity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestaurantTable that = (RestaurantTable) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
