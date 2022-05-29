@@ -35,4 +35,11 @@ public class OrderPadService {
         orderPadDAO.create(orderPad);
         return orderPad;
     }
+
+    public OrderPad findById(Integer orderPadId) {
+        var orderPad = orderPadDAO.read(OrderPad.class, orderPadId);
+        if (orderPad == null)
+            throw new GlobalException("OrderPad not found", HttpStatus.NOT_FOUND);
+        return orderPad;
+    }
 }

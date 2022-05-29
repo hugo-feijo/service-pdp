@@ -1,6 +1,7 @@
 package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,11 @@ public class Client implements java.io.Serializable{
     private Set<ClientsSolicitation> clientsSolicitation;
 
     public Client() {
+        this.setId(0);
+        this.setName("NO NAME");
+        this.setCpf("00000000000");
+        this.setOrderPad(null);
+        this.setClientsSolicitation(new HashSet<>());
     }
 
     public Client(int id, String name, String cpf, OrderPad orderPad, Set<ClientsSolicitation> clientsSolicitation) {
@@ -61,6 +67,7 @@ public class Client implements java.io.Serializable{
     }
 
     public OrderPad getOrderPad() {
+        this.orderPad.setClients(null);
         return orderPad;
     }
 

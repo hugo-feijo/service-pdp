@@ -1,16 +1,24 @@
 package com.pdp.servicepdp.rest;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pdp.servicepdp.model.Client;
+import com.pdp.servicepdp.model.dto.ClientDTO;
+import com.pdp.servicepdp.service.ClientService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/api/client")
 public class ClientRest {
 
+    private final ClientService clientService;
+
+    public ClientRest(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
     @PostMapping
-    public String createClient() {
-        return "Client created";
+    public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO, @RequestHeader("X-Order-Pad-Id") Integer orderPadId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.create(clientDTO, orderPadId));
     }
 }
