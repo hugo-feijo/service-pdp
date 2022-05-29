@@ -2,7 +2,7 @@ package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,6 +27,10 @@ public class OrderPad implements java.io.Serializable{
     private Set<Client> clients;
 
     public OrderPad() {
+        this.setId(0);
+        this.setOpenAt(LocalDateTime.now());
+        this.setTable(null);
+        this.setClients(new HashSet<>());
     }
 
     public OrderPad(int id, LocalDateTime openAt, LocalDateTime closedAt, RestaurantTable table, Set<Client> clients) {

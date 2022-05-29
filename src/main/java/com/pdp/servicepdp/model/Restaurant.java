@@ -17,6 +17,9 @@ public class Restaurant implements java.io.Serializable{
     private String imageBannerUrl;
 
     public Restaurant() {
+        this.setId(0);
+        this.setName("NO NAME");
+        this.setImageBannerUrl(null);
     }
 
     public Restaurant(int id, String name, String imageBannerUrl) {

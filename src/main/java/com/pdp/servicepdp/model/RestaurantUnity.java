@@ -18,6 +18,9 @@ public class RestaurantUnity implements java.io.Serializable{
     private Restaurant restaurant;
 
     public RestaurantUnity() {
+        this.setId(0);
+        this.setName("NO NAME");
+        this.setRestaurant(null);
     }
 
     public RestaurantUnity(int id, String name, Restaurant restaurant) {

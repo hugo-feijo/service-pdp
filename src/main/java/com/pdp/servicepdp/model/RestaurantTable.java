@@ -18,6 +18,9 @@ public class RestaurantTable {
     private RestaurantUnity restaurantUnity;
 
     public RestaurantTable() {
+        this.setId(0);
+        this.setIdentification("NO IDENTIFICATION");
+        this.setRestaurantUnity(null);
     }
 
     public RestaurantTable(int id, String identification, RestaurantUnity restaurantUnity) {
