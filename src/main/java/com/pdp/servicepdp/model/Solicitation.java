@@ -12,7 +12,6 @@ public class Solicitation implements java.io.Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private int id;
-    //itens
 
     @Column(name = "solicited_at",nullable = false)
     private LocalDateTime solicitedAt;
@@ -21,15 +20,20 @@ public class Solicitation implements java.io.Serializable{
     private LocalDateTime deliveredAt;
 
     @OneToMany(mappedBy = "solicitation")
+    private Set<ItemsSolicitation> items;
+
+    @OneToMany(mappedBy = "solicitation")
     private Set<ClientsSolicitation> clientsSolicitation;
 
     public Solicitation() {
     }
 
-    public Solicitation(int id, LocalDateTime solicitedAt, LocalDateTime deliveredAt, Set<ClientsSolicitation> clientsSolicitation) {
+    public Solicitation(int id, LocalDateTime solicitedAt, LocalDateTime deliveredAt, Set<ItemsSolicitation> items,
+                        Set<ClientsSolicitation> clientsSolicitation) {
         this.id = id;
         this.solicitedAt = solicitedAt;
         this.deliveredAt = deliveredAt;
+        this.items = items;
         this.clientsSolicitation = clientsSolicitation;
     }
 
@@ -55,6 +59,14 @@ public class Solicitation implements java.io.Serializable{
 
     public void setDeliveredAt(LocalDateTime deliveredAt) {
         this.deliveredAt = deliveredAt;
+    }
+
+    public Set<ItemsSolicitation> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<ItemsSolicitation> items) {
+        this.items = items;
     }
 
     public Set<ClientsSolicitation> getClientsSolicitation() {

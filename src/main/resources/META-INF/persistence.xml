@@ -9,6 +9,12 @@
     <class>com.pdp.servicepdp.model.RestaurantTable</class>
     <class>com.pdp.servicepdp.model.RestaurantUnity</class>
     <class>com.pdp.servicepdp.model.Solicitation</class>
+    <class>com.pdp.servicepdp.model.Category</class>
+    <class>com.pdp.servicepdp.model.Item</class>
+    <class>com.pdp.servicepdp.model.ItemPictures</class>
+    <class>com.pdp.servicepdp.model.ItemsSolicitation</class>
+    <class>com.pdp.servicepdp.model.Menu</class>
+    <class>com.pdp.servicepdp.model.Picture</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pdp"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
