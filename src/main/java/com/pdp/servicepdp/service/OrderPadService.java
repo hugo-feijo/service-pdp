@@ -20,8 +20,8 @@ public class OrderPadService {
         this.restaurantTableService = restaurantTableService;
     }
 
-    public OrderPad getOpenedOrderPadOrCreate(Integer restaurantUnityId, Integer tableId) {
-        List<OrderPad> openedOrderPad = orderPadDAO.getOpenedOrderPadByRestaurantUnityIdAndTableId(restaurantUnityId, tableId);
+    public OrderPad getOpenedOrderPadOrCreate(Integer tableId) {
+        List<OrderPad> openedOrderPad = orderPadDAO.getOpenedOrderPadByTableId(tableId);
         return switch (openedOrderPad.size()) {
             case 0 -> this.createOrderPad(tableId);
             case 1 -> openedOrderPad.get(0);

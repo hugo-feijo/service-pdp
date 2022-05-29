@@ -14,7 +14,7 @@ public class OrderPadRest {
     }
 
     @PostMapping("/open")
-    public OrderPad createIfNotExist(@RequestParam("restaurantUnityId") Integer restaurantUnityId, @RequestParam("tableId") Integer tableId) {
-        return orderPadService.getOpenedOrderPadOrCreate(restaurantUnityId, tableId);
+    public OrderPad createIfNotExist(@RequestParam("tableId") Integer tableId) {
+        return orderPadService.getOpenedOrderPadOrCreate(tableId);
     }
 }
