@@ -21,4 +21,46 @@ public class Solicitation implements java.io.Serializable{
 
     @OneToMany(mappedBy = "solicitation")
     private Set<ClientsSolicitation> clientsSolicitation;
+
+    public Solicitation() {
+    }
+
+    public Solicitation(int id, LocalDateTime solicitedAt, LocalDateTime deliveredAt, Set<ClientsSolicitation> clientsSolicitation) {
+        this.id = id;
+        this.solicitedAt = solicitedAt;
+        this.deliveredAt = deliveredAt;
+        this.clientsSolicitation = clientsSolicitation;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getSolicitedAt() {
+        return solicitedAt;
+    }
+
+    public void setSolicitedAt(LocalDateTime solicitedAt) {
+        this.solicitedAt = solicitedAt;
+    }
+
+    public LocalDateTime getDeliveredAt() {
+        return deliveredAt;
+    }
+
+    public void setDeliveredAt(LocalDateTime deliveredAt) {
+        this.deliveredAt = deliveredAt;
+    }
+
+    public Set<ClientsSolicitation> getClientsSolicitation() {
+        return clientsSolicitation;
+    }
+
+    public void setClientsSolicitation(Set<ClientsSolicitation> clientsSolicitation) {
+        this.clientsSolicitation = clientsSolicitation;
+    }
 }
