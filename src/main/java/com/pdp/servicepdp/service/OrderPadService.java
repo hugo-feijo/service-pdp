@@ -2,6 +2,7 @@ package com.pdp.servicepdp.service;
 
 import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.OrderPad;
+import com.pdp.servicepdp.model.dto.OrderPadDTO;
 import com.pdp.servicepdp.repository.OrderPadDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,11 @@ public class OrderPadService {
         this.restaurantTableService = restaurantTableService;
     }
 
-    public OrderPad getOpenedOrderPadOrCreate(Integer tableId) {
+    public OrderPadDTO getOpenedOrderPadOrCreate(Integer tableId) {
         List<OrderPad> openedOrderPad = orderPadDAO.getOpenedOrderPadByTableId(tableId);
         return switch (openedOrderPad.size()) {
-            case 0 -> this.createOrderPad(tableId);
-            case 1 -> openedOrderPad.get(0);
+            case 0 -> new OrderPadDTO(this.createOrderPad(tableId));
+            case 1 -> new OrderPadDTO(openedOrderPad.get(0));
             default -> throw new GlobalException("More than one opened order pad", HttpStatus.BAD_REQUEST);
         };
     }
