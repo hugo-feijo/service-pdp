@@ -13,8 +13,8 @@ public class OrderPadRest {
         this.orderPadService = orderPadService;
     }
 
-    @GetMapping("/open")
-    public OrderPad getOpenOrderPad(@RequestParam("restaurantUnityId") Integer restaurantUnityId) {
-        return orderPadService.getOpenOrderPadByRestaurantUnityId(restaurantUnityId);
+    @PostMapping("/open")
+    public OrderPad createIfNotExist(@RequestParam("restaurantUnityId") Integer restaurantUnityId, @RequestParam("tableId") Integer tableId) {
+        return orderPadService.getOpenedOrderPadOrCreate(restaurantUnityId, tableId);
     }
 }
