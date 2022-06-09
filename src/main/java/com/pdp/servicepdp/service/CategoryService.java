@@ -1,0 +1,19 @@
+package com.pdp.servicepdp.service;
+
+import com.pdp.servicepdp.model.Category;
+import com.pdp.servicepdp.repository.CategoryDAO;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CategoryService {
+    private final CategoryDAO categoryDAO;
+
+    public CategoryService(CategoryDAO categoryDAO) {
+        this.categoryDAO = categoryDAO;
+    }
+
+    public Category create(Category category) {
+        categoryDAO.create(category);
+        return category;
+    }
+}
