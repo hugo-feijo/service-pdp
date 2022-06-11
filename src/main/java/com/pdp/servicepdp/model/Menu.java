@@ -6,7 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "MENU")
+@Table(name = "MENU", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_restaurant_unity", columnNames = {"restaurantunity_id"})
+})
 public class Menu implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,7 @@ public class Menu implements java.io.Serializable{
     private Set<Item> items;
 
     @OneToOne
+    @JoinColumn(name = "restaurantunity_id", unique = true)
     private RestaurantUnity restaurantUnity;
 
     public Menu() {
