@@ -1,5 +1,6 @@
 package com.pdp.servicepdp.service;
 
+import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.Item;
 import com.pdp.servicepdp.model.ItemPictures;
 import com.pdp.servicepdp.model.Picture;
@@ -7,6 +8,7 @@ import com.pdp.servicepdp.model.dto.ItemDTO;
 import com.pdp.servicepdp.model.dto.ItemResponseDTO;
 import com.pdp.servicepdp.repository.ItemDAO;
 import com.pdp.servicepdp.repository.ItemPicturesDAO;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +47,12 @@ public class ItemService {
             itemPicturesDAO.create(itemPicture);
             return itemPicture;
         }).collect(Collectors.toSet());
+    }
+
+    public Item findById(Integer id) {
+        var item = itemDAO.read(Item.class, id);
+        if (item == null)
+            throw new GlobalException("Item not found", HttpStatus.NOT_FOUND);
+        return item;
     }
 }

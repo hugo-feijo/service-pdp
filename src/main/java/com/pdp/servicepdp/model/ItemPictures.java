@@ -36,10 +36,6 @@ public class ItemPictures implements java.io.Serializable{
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
     public void setItem(Item item) {
         this.item = item;
     }

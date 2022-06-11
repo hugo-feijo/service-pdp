@@ -31,7 +31,7 @@ public class RestaurantUnityService {
     public RestaurantUnity findById(Integer id) {
         var restaurantUnity = restaurantUnityDAO.read(RestaurantUnity.class, id);
         if (restaurantUnity == null)
-            throw new GlobalException("Restaurant not found", HttpStatus.NOT_FOUND);
+            throw new GlobalException("Restaurant Unity not found", HttpStatus.NOT_FOUND);
         return restaurantUnity;
     }
 }
