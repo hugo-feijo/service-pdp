@@ -36,20 +36,20 @@ public class ItemPictures implements java.io.Serializable{
         this.id = id;
     }
 
-    public Item getClient() {
+    public Item getItem() {
         return item;
     }
 
-    public void setClient(Item client) {
-        this.item = client;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public Picture getSolicitation() {
+    public Picture getPicture() {
         return picture;
     }
 
-    public void setSolicitation(Picture solicitation) {
-        this.picture = solicitation;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     @Override

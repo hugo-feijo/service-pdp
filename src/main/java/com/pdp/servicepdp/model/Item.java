@@ -1,5 +1,7 @@
 package com.pdp.servicepdp.model;
 
+import com.pdp.servicepdp.model.dto.ItemDTO;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,6 +28,13 @@ public class Item implements java.io.Serializable{
     @OneToMany(mappedBy = "item")
     private Set<ItemPictures> pictures;
 
+    public Item(ItemDTO itemDTO, Category category) {
+        this.setId(0);
+        this.setTitle(itemDTO.getTitle());
+        this.setDescription(itemDTO.getDescription());
+        this.setCategory(category);
+        this.setPictures(new HashSet<>());
+    }
 
     public Item() {
         this.setId(0);
