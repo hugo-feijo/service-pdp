@@ -4,6 +4,7 @@ import com.pdp.servicepdp.model.OrderPad;
 import com.pdp.servicepdp.model.RestaurantTable;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class OrderPadDTO  implements java.io.Serializable{
         this.id = orderPad.getId();
         this.openAt = orderPad.getOpenAt();
         this.restaurantTable = orderPad.getRestaurantTable();
-        this.clients = orderPad.getClients().stream().map(ClientDTO::new).collect(Collectors.toSet());
+        this.clients = orderPad.getClients() != null ? orderPad.getClients().stream().map(ClientDTO::new).collect(Collectors.toSet()) : new HashSet<>();
     }
 
     public OrderPadDTO(int id, LocalDateTime openAt, RestaurantTable restaurantTable, Set<ClientDTO> clients) {

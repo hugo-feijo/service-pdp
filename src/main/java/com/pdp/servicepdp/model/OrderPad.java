@@ -24,7 +24,7 @@ public class OrderPad implements java.io.Serializable{
     @JoinColumn(name = "id_restaurant_table", nullable = false, referencedColumnName = "id")
     private RestaurantTable restaurantTable;
 
-    @OneToMany(mappedBy = "orderPad")
+    @OneToMany(mappedBy = "orderPad", fetch = FetchType.EAGER)
     private Set<Client> clients;
 
     public OrderPad() {

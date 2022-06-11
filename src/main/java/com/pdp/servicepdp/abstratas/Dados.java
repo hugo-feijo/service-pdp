@@ -7,11 +7,11 @@ import javax.persistence.Persistence;
 abstract public class Dados {
 
     private static EntityManager manager = null;
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("servicePDPPU");
 
     public static EntityManager getEntityManager() {
 
         if (manager == null) {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("servicePDPPU");
 
             manager = factory.createEntityManager();
         }
