@@ -2,12 +2,10 @@ package com.pdp.servicepdp.rest;
 
 import com.pdp.servicepdp.model.dto.OrderPadDTO;
 import com.pdp.servicepdp.service.OrderPadService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "${cors.url}")
 @RequestMapping("/v1/api/order-pad")
 public class OrderPadRest {
     private final OrderPadService orderPadService;
