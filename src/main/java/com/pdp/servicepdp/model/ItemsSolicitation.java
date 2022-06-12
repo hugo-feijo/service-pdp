@@ -12,11 +12,11 @@ public class ItemsSolicitation implements java.io.Serializable{
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_item")
+    @JoinColumn(name = "id_item", nullable = false)
     private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "id_solicitation")
+    @JoinColumn(name = "id_solicitation", nullable = false)
     private Solicitation solicitation;
 
     public ItemsSolicitation() {
@@ -42,10 +42,6 @@ public class ItemsSolicitation implements java.io.Serializable{
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public Solicitation getSolicitation() {
-        return solicitation;
     }
 
     public void setSolicitation(Solicitation solicitation) {

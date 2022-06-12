@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CLIENTS_SOLICITATION")
+@Table(name = "ITEM_PICTURES")
 public class ItemPictures implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

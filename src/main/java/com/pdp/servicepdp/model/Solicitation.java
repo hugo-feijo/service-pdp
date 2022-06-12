@@ -2,6 +2,7 @@ package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,10 @@ public class Solicitation implements java.io.Serializable{
     private Set<ClientsSolicitation> clientsSolicitation;
 
     public Solicitation() {
+        this.setId(0);
+        this.setSolicitedAt(LocalDateTime.now());
+        this.setItems(new HashSet<>());
+        this.setClientsSolicitation(new HashSet<>());
     }
 
     public Solicitation(int id, LocalDateTime solicitedAt, LocalDateTime deliveredAt, Set<ItemsSolicitation> items,

@@ -36,6 +36,7 @@ public class Item implements java.io.Serializable{
         this.setTitle(itemDTO.getTitle());
         this.setDescription(itemDTO.getDescription());
         this.setCategory(category);
+        this.setValue(itemDTO.getValue());
         this.setPictures(new HashSet<>());
     }
 
