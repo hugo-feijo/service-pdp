@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "${cors.url}")
 @RequestMapping("/v1/api/menu")
 public class MenuRest {
 
