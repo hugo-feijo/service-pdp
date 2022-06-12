@@ -6,14 +6,17 @@ public class ItemDTO implements java.io.Serializable{
 
     private String title;
     private String description;
+
+    private Double value;
     private Integer categoryId;
     private Set<Integer> picturesId;
 
     public ItemDTO() {
     }
 
-    public ItemDTO(String title, String description, Integer categoryId, Set<Integer> picturesId) {
+    public ItemDTO(String title, Double value, String description, Integer categoryId, Set<Integer> picturesId) {
         this.title = title;
+        this.value = value;
         this.description = description;
         this.categoryId = categoryId;
         this.picturesId = picturesId;
@@ -25,6 +28,14 @@ public class ItemDTO implements java.io.Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public String getDescription() {

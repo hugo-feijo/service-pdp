@@ -21,6 +21,9 @@ public class Item implements java.io.Serializable{
     @Column(name = "description", length = 250, nullable = false)
     private String description;
 
+    @Column(name = "value", length = 250, nullable = false)
+    private Double value;
+
     @ManyToOne
     @JoinColumn(name = "id_category", nullable = false)
     private Category category;
@@ -39,14 +42,16 @@ public class Item implements java.io.Serializable{
     public Item() {
         this.setId(0);
         this.setTitle("NO TITLE");
+        this.setValue(0.0);
         this.setDescription("NO DESCRIPTION");
         this.setCategory(null);
         this.setPictures(new HashSet<>());
     }
 
-    public Item(int id, String title, String description, Category category) {
+    public Item(int id, String title, Double value, String description, Category category) {
         this.id = id;
         this.title = title;
+        this.value = value;
         this.description = description;
         this.category = category;
     }
@@ -65,6 +70,14 @@ public class Item implements java.io.Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public String getDescription() {

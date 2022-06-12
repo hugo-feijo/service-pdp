@@ -9,6 +9,8 @@ public class ItemResponseDTO implements java.io.Serializable{
 
     private String title;
     private String description;
+
+    private Double value;
     private String categoryName;
     private Set<String> pictures;
 
@@ -24,6 +26,7 @@ public class ItemResponseDTO implements java.io.Serializable{
 
     public ItemResponseDTO(Item item) {
         this.setTitle(item.getTitle());
+        this.setValue(item.getValue());
         this.setDescription(item.getDescription());
         this.setCategoryName(item.getCategory().getDescription());
         this.setPictures(item.getPictures().stream().map(itemPictures -> itemPictures.getPicture().getUrl()).collect(Collectors.toSet()));
@@ -35,6 +38,14 @@ public class ItemResponseDTO implements java.io.Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public String getDescription() {
