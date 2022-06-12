@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class ItemResponseDTO implements java.io.Serializable{
 
+    private Integer id;
     private String title;
     private String description;
 
@@ -17,7 +18,8 @@ public class ItemResponseDTO implements java.io.Serializable{
     public ItemResponseDTO() {
     }
 
-    public ItemResponseDTO(String title, String description, String categoryName, Set<String> pictures) {
+    public ItemResponseDTO(Integer id, String title, String description, String categoryName, Set<String> pictures) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.categoryName = categoryName;
@@ -25,11 +27,20 @@ public class ItemResponseDTO implements java.io.Serializable{
     }
 
     public ItemResponseDTO(Item item) {
+        this.setId(item.getId());
         this.setTitle(item.getTitle());
         this.setValue(item.getValue());
         this.setDescription(item.getDescription());
         this.setCategoryName(item.getCategory().getDescription());
         this.setPictures(item.getPictures().stream().map(itemPictures -> itemPictures.getPicture().getUrl()).collect(Collectors.toSet()));
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
