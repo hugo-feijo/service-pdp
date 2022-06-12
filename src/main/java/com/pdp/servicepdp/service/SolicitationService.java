@@ -28,7 +28,7 @@ public class SolicitationService {
         this.itemService = itemService;
     }
 
-    public Solicitation create(SolicitationDTO solicitationDTO) {
+    public String create(SolicitationDTO solicitationDTO) {
         var solicitation = new Solicitation();
         solicitationDAO.create(solicitation);
         var clients = solicitationDTO.getClientsId().stream().map(clientService::findById).collect(Collectors.toSet());
@@ -48,7 +48,7 @@ public class SolicitationService {
 
         solicitation.setItems(itemsSolicitation);
         solicitation.setClientsSolicitation(clientsSolicitation);
-        return solicitation;
+        return "Solicitation created with success";
     }
 
 }
