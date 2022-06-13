@@ -32,4 +32,11 @@ public class ClientService {
             throw new GlobalException("Client not found", HttpStatus.NOT_FOUND);
         return client;
     }
+
+    public Client inactiveById(Integer clientId) {
+        var client = this.findById(clientId);
+        client.setActive(false);
+        clientDAO.update(client);
+        return client;
+    }
 }

@@ -23,6 +23,10 @@ public class Client implements java.io.Serializable{
     @JoinColumn(name = "id_order_pad", nullable = false)
     private OrderPad orderPad;
 
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
+
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<ClientsSolicitation> clientsSolicitation;
 
@@ -31,14 +35,16 @@ public class Client implements java.io.Serializable{
         this.setName("NO NAME");
         this.setCpf("00000000000");
         this.setOrderPad(null);
+        this.setActive(Boolean.TRUE);
         this.setClientsSolicitation(new HashSet<>());
     }
 
-    public Client(int id, String name, String cpf, OrderPad orderPad, Set<ClientsSolicitation> clientsSolicitation) {
+    public Client(int id, String name, String cpf, OrderPad orderPad, Boolean active, Set<ClientsSolicitation> clientsSolicitation) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.orderPad = orderPad;
+        this.active = active;
         this.clientsSolicitation = clientsSolicitation;
     }
 
@@ -64,6 +70,14 @@ public class Client implements java.io.Serializable{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public OrderPad getOrderPad() {

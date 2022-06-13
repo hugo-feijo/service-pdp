@@ -22,4 +22,9 @@ public class ClientRest {
     public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO, @RequestHeader("X-Order-Pad-Id") Integer orderPadId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.create(clientDTO, orderPadId));
     }
+
+    @PutMapping("/{clientId}/inactive")
+    public Client inactiveClient(@PathVariable Integer clientId) {
+        return clientService.inactiveById(clientId);
+    }
 }
