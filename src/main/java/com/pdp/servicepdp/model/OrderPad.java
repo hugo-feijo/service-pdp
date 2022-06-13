@@ -1,5 +1,7 @@
 package com.pdp.servicepdp.model;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -25,6 +27,7 @@ public class OrderPad implements java.io.Serializable{
     private RestaurantTable restaurantTable;
 
     @OneToMany(mappedBy = "orderPad", fetch = FetchType.EAGER)
+    @Where(clause = "active = true")
     private Set<Client> clients;
 
     public OrderPad() {
