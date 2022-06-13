@@ -4,14 +4,16 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "RESTAURANT_TABLE")
+@Table(name = "RESTAURANT_TABLE", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name", "id_restaurant_unity"})
+})
 public class RestaurantTable implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private int id;
 
-    @Column(name = "name", length = 250, nullable = false, unique = true)
+    @Column(name = "name", length = 250, nullable = false)
     private String identification;
 
     @ManyToOne(cascade = CascadeType.DETACH)
