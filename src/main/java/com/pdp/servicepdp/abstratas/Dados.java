@@ -16,9 +16,6 @@ abstract public class Dados {
 
         if (manager == null) {
             var properties = new HashMap<String, String>();
-            properties.put("javax.persistence.jdbc.url", DbProperties.DATABASE_URL);
-            properties.put("javax.persistence.jdbc.user", DbProperties.DATABASE_USER);
-            properties.put("javax.persistence.jdbc.password", DbProperties.DATABASE_PASSWORD);
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("servicePDPPU", properties);
             manager = factory.createEntityManager();
         }

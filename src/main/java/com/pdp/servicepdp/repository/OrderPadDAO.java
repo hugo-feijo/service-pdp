@@ -12,18 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface OrderPadDAO extends JpaRepository<OrderPad,Integer> {
-    @Query("select op from OrderPad op WHERE op.restaurantTable.id = ?1 AND op.closedAt IS NULL")
+    @Query("select DISTINCT op from OrderPad op INNER JOIN op.clients c WHERE c.active = true AND op.restaurantTable.id = ?1 AND op.closedAt IS NULL")
     public List<OrderPad> getOpenedOrderPadByTableId(Integer tableId);
-//    {
-//        String jpql="";
-//        List<OrderPad> orders = super.read(jpql, tableId);
-//        orders.forEach(order -> {
-//            Dados.getEntityManager().refresh(order);
-//            if(order.getClients() != null){
-//                order.getClients().forEach(client -> Dados.getEntityManager().refresh(client));
-//                order.setClients(order.getClients().stream().filter(Client::getActive).collect(Collectors.toSet()));
-//            }
-//        });
-//        return orders;
-//    }
 }
