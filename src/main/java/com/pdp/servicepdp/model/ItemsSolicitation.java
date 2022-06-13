@@ -15,7 +15,7 @@ public class ItemsSolicitation implements java.io.Serializable{
     @JoinColumn(name = "id_item", nullable = false)
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitation", nullable = false)
     private Solicitation solicitation;
 
@@ -52,8 +52,8 @@ public class ItemsSolicitation implements java.io.Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ItemsSolicitation clientsSolicitation = (ItemsSolicitation) o;
-        return id == clientsSolicitation.id;
+        ItemsSolicitation itemsSolicitation = (ItemsSolicitation) o;
+        return id == itemsSolicitation.id;
     }
 
     @Override

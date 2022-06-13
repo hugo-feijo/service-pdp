@@ -15,7 +15,7 @@ public class ClientsSolicitation implements java.io.Serializable{
     @JoinColumn(name = "id_client",nullable = false)
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitation",nullable = false)
     private Solicitation solicitation;
 

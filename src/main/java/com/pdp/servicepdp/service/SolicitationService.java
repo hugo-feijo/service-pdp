@@ -10,6 +10,7 @@ import com.pdp.servicepdp.repository.SolicitationDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,4 +52,7 @@ public class SolicitationService {
         return "Solicitation created with success";
     }
 
+    public List<Solicitation> getSolicitationsByClientId(Integer clientId) {
+        return solicitationDAO.findByClientId(clientId);
+    }
 }

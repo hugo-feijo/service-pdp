@@ -23,7 +23,7 @@ public class Client implements java.io.Serializable{
     @JoinColumn(name = "id_order_pad", nullable = false)
     private OrderPad orderPad;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<ClientsSolicitation> clientsSolicitation;
 
     public Client() {
@@ -73,10 +73,6 @@ public class Client implements java.io.Serializable{
 
     public void setOrderPad(OrderPad orderPad) {
         this.orderPad = orderPad;
-    }
-
-    public Set<ClientsSolicitation> getClientsSolicitation() {
-        return clientsSolicitation;
     }
 
     public void setClientsSolicitation(Set<ClientsSolicitation> clientsSolicitation) {
