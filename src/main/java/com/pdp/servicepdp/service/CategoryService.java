@@ -15,14 +15,14 @@ public class CategoryService {
     }
 
     public Category create(Category category) {
-        categoryDAO.create(category);
+        categoryDAO.save(category);
         return category;
     }
 
     public Category findById(Integer id) {
-        var category = categoryDAO.read(Category.class, id);
-        if (category == null)
+        var category = categoryDAO.findById(id);
+        if (category.isEmpty())
             throw new GlobalException("Category not found", HttpStatus.NOT_FOUND);
-        return category;
+        return category.get();
     }
 }

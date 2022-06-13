@@ -52,4 +52,12 @@ public class Picture implements java.io.Serializable{
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

@@ -25,14 +25,14 @@ public class RestaurantTableService {
         restaurantTable.setIdentification(restaurantTableDTO.getIdentification());
         restaurantTable.setRestaurantUnity(restaurantUnity);
 
-        restaurantTableDAO.create(restaurantTable);
+        restaurantTableDAO.save(restaurantTable);
         return restaurantTable;
     }
 
     public RestaurantTable findById(Integer id) {
-        var restaurantTable = restaurantTableDAO.read(RestaurantTable.class, id);
-        if (restaurantTable == null)
+        var restaurantTable = restaurantTableDAO.findById(id);
+        if (restaurantTable.isEmpty())
             throw new GlobalException("RestaurantTable not found", HttpStatus.NOT_FOUND);
-        return restaurantTable;
+        return restaurantTable.get();
     }
 }

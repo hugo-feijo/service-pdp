@@ -34,7 +34,7 @@ public class ItemService {
         var pictures = itemDTO.getPicturesId().stream().map(pictureService::findById).toList();
 
         var item = new Item(itemDTO, category);
-        itemDAO.create(item);
+        itemDAO.save(item);
 
         item.setPictures(createItemPictures(pictures, item));
 
@@ -44,15 +44,15 @@ public class ItemService {
     private Set<ItemPictures> createItemPictures(List<Picture> pictures, Item item) {
         return pictures.stream().map(picture -> {
             var itemPicture = new ItemPictures(0, item, picture);
-            itemPicturesDAO.create(itemPicture);
+            itemPicturesDAO.save(itemPicture);
             return itemPicture;
         }).collect(Collectors.toSet());
     }
 
     public Item findById(Integer id) {
-        var item = itemDAO.read(Item.class, id);
-        if (item == null)
+        var item = itemDAO.findById(id);
+        if (item.isEmpty())
             throw new GlobalException("Item not found", HttpStatus.NOT_FOUND);
-        return item;
+        return item.get();
     }
 }

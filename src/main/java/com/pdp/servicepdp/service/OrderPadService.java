@@ -33,14 +33,14 @@ public class OrderPadService {
     public OrderPad createOrderPad(Integer tableId) {
         var orderPad = new OrderPad();
         orderPad.setRestaurantTable(restaurantTableService.findById(tableId));
-        orderPadDAO.create(orderPad);
+        orderPadDAO.save(orderPad);
         return orderPad;
     }
 
     public OrderPad findById(Integer orderPadId) {
-        var orderPad = orderPadDAO.read(OrderPad.class, orderPadId);
-        if (orderPad == null)
+        var orderPad = orderPadDAO.findById(orderPadId);
+        if (orderPad.isEmpty())
             throw new GlobalException("OrderPad not found", HttpStatus.NOT_FOUND);
-        return orderPad;
+        return orderPad.get();
     }
 }

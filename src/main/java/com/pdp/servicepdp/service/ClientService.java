@@ -22,21 +22,21 @@ public class ClientService {
         client.setName(clientDTO.getName());
         client.setCpf(clientDTO.getCpf());
         client.setOrderPad(orderPadService.findById(orderPadId));
-        clientDAO.create(client);
+        clientDAO.save(client);
         return client;
     }
 
     public Client findById(Integer id) {
-        var client = clientDAO.read(Client.class, id);
-        if (client == null)
+        var client = clientDAO.findById(id);
+        if (client.isEmpty())
             throw new GlobalException("Client not found", HttpStatus.NOT_FOUND);
-        return client;
+        return client.get();
     }
 
     public Client inactiveById(Integer clientId) {
         var client = this.findById(clientId);
         client.setActive(false);
-        clientDAO.update(client);
+        clientDAO.save(client);
         return client;
     }
 }

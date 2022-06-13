@@ -15,14 +15,14 @@ public class PictureService {
     }
 
     public Picture create(Picture picture) {
-        pictureDAO.create(picture);
+        pictureDAO.save(picture);
         return picture;
     }
 
     public Picture findById(Integer id) {
-        var picture = pictureDAO.read(Picture.class, id);
-        if (picture == null)
+        var picture = pictureDAO.findById(id);
+        if (picture.isEmpty())
             throw new GlobalException("Picture not found", HttpStatus.NOT_FOUND);
-        return picture;
+        return picture.get();
     }
 }

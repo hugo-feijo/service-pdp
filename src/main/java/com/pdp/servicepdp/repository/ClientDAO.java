@@ -1,9 +1,7 @@
 package com.pdp.servicepdp.repository;
 
-import com.pdp.servicepdp.abstratas.dao;
 import com.pdp.servicepdp.model.Client;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class ClientDAO extends dao<Client> {
+public interface ClientDAO extends JpaRepository<Client,Integer > {
 }

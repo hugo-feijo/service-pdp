@@ -15,14 +15,14 @@ public class RestaurantService {
     }
 
     public Restaurant create(Restaurant restaurant) {
-        restaurantDAO.create(restaurant);
+        restaurantDAO.save(restaurant);
         return restaurant;
     }
 
     public Restaurant findById(Integer id) {
-        var restaurant = restaurantDAO.read(Restaurant.class, id);
-        if (restaurant == null)
+        var restaurant = restaurantDAO.findById(id);
+        if (restaurant.isEmpty())
             throw new GlobalException("Restaurant not found", HttpStatus.NOT_FOUND);
-        return restaurant;
+        return restaurant.get();
     }
 }

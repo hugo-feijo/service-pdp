@@ -26,7 +26,7 @@ public class MenuService {
     public MenuResponseDTO create(MenuDTO menuDTO) {
         var menu = menuDTOToMenu(menuDTO);
         try {
-            menuDAO.create(menu);
+            menuDAO.save(menu);
         } catch (RollbackException e) {
             if(e.getMessage().contains("menu_restaurantunity_id_key"))
                 throw new GlobalException("This unity already have a Menu.", HttpStatus.BAD_REQUEST);

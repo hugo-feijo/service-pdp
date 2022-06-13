@@ -31,19 +31,19 @@ public class SolicitationService {
 
     public String create(SolicitationDTO solicitationDTO) {
         var solicitation = new Solicitation();
-        solicitationDAO.create(solicitation);
+        solicitationDAO.save(solicitation);
         var clients = solicitationDTO.getClientsId().stream().map(clientService::findById).collect(Collectors.toSet());
         var items = solicitationDTO.getItemsId().stream().map(itemService::findById).collect(Collectors.toSet());
         var clientsSolicitation = new HashSet<ClientsSolicitation>();
         var itemsSolicitation = new HashSet<ItemsSolicitation>();
         items.forEach(item -> {
             var itemSolicitation = new ItemsSolicitation(0, item, solicitation);
-            itemsSolicitationDAO.create(itemSolicitation);
+            itemsSolicitationDAO.save(itemSolicitation);
             itemsSolicitation.add(itemSolicitation);
         });
         clients.forEach(client -> {
             var clientSolicitation = new ClientsSolicitation(0, client, solicitation);
-            clientsSolicitationDAO.create(clientSolicitation);
+            clientsSolicitationDAO.save(clientSolicitation);
             clientsSolicitation.add(clientSolicitation);
         });
 

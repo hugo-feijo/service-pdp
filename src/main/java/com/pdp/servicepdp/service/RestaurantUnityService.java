@@ -24,14 +24,14 @@ public class RestaurantUnityService {
         restaurantUnity.setName(restaurantUnityDTO.getName());
         restaurantUnity.setRestaurant(restaurant);
 
-        restaurantUnityDAO.create(restaurantUnity);
+        restaurantUnityDAO.save(restaurantUnity);
         return restaurantUnity;
     }
 
     public RestaurantUnity findById(Integer id) {
-        var restaurantUnity = restaurantUnityDAO.read(RestaurantUnity.class, id);
-        if (restaurantUnity == null)
+        var restaurantUnity = restaurantUnityDAO.findById(id);
+        if (restaurantUnity.isEmpty())
             throw new GlobalException("Restaurant Unity not found", HttpStatus.NOT_FOUND);
-        return restaurantUnity;
+        return restaurantUnity.get();
     }
 }
