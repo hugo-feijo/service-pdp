@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "${cors.url}")
+@CrossOrigin
 @RequestMapping("/v1/api/solicitation")
 public class SolicitationRest {
 

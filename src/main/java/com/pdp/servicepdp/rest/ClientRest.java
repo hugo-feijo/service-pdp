@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "${cors.url}")
+@CrossOrigin
 @RequestMapping("/v1/api/client")
 public class ClientRest {
 

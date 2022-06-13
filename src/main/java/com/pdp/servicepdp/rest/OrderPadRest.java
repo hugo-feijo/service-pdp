@@ -5,7 +5,7 @@ import com.pdp.servicepdp.service.OrderPadService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "${cors.url}")
+@CrossOrigin
 @RequestMapping("/v1/api/order-pad")
 public class OrderPadRest {
     private final OrderPadService orderPadService;
