@@ -21,8 +21,8 @@ public class OrderPadService {
         this.restaurantTableService = restaurantTableService;
     }
 
-    public OrderPadDTO getOpenedOrderPadOrCreate(Integer tableId) {
-        List<OrderPad> openedOrderPad = orderPadDAO.getOpenedOrderPadByTableId(tableId);
+    public OrderPadDTO getOpenedOrderPadOrCreate(Integer tableId, String tableCode) {
+        List<OrderPad> openedOrderPad = orderPadDAO.getOpenedOrderPadByTableIdOrTableCode(tableId, tableCode);
         return switch (openedOrderPad.size()) {
             case 0 -> new OrderPadDTO(this.createOrderPad(tableId));
             case 1 -> new OrderPadDTO(openedOrderPad.get(0));
