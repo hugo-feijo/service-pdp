@@ -2,23 +2,23 @@ package com.pdp.servicepdp.model.dto;
 
 public class RestaurantTableDTO implements java.io.Serializable{
 
-    private String identification;
+    private String name;
     private Integer restaurantUnityId;
 
     public RestaurantTableDTO() {
     }
 
-    public RestaurantTableDTO(String identification, Integer restaurantUnityId) {
-        this.identification = identification;
+    public RestaurantTableDTO(String name, Integer restaurantUnityId) {
+        this.name = name;
         this.restaurantUnityId = restaurantUnityId;
     }
 
-    public String getIdentification() {
-        return identification;
+    public String getName() {
+        return name;
     }
 
-    public void setIdentification(String identification) {
-        this.identification = identification;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getRestaurantUnityId() {

@@ -22,7 +22,7 @@ public class RestaurantTableService {
         var restaurantTable = new RestaurantTable();
         var restaurantUnity = restaurantUnityService.findById(restaurantTableDTO.getRestaurantUnityId());
 
-        restaurantTable.setIdentification(restaurantTableDTO.getIdentification());
+        restaurantTable.setName(restaurantTableDTO.getName());
         restaurantTable.setRestaurantUnity(restaurantUnity);
 
         restaurantTableDAO.save(restaurantTable);
