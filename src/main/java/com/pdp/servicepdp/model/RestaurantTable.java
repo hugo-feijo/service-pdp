@@ -2,6 +2,7 @@ package com.pdp.servicepdp.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "RESTAURANT_TABLE", uniqueConstraints = {
@@ -13,8 +14,11 @@ public class RestaurantTable implements java.io.Serializable {
     @Column(name = "id",nullable = false)
     private int id;
 
-    @Column(name = "name", length = 250, nullable = false)
+    @Column(name = "identification", length = 7, nullable = false, unique = true)
     private String identification;
+
+    @Column(name = "name", length = 250, nullable = false)
+    private String name;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_restaurant_unity", nullable = false, referencedColumnName = "id")
@@ -22,13 +26,15 @@ public class RestaurantTable implements java.io.Serializable {
 
     public RestaurantTable() {
         this.setId(0);
-        this.setIdentification("NO IDENTIFICATION");
+        this.setIdentification(UUID.randomUUID().toString().replace("-", "").substring(0, 5));
+        this.setName("NO NAME");
         this.setRestaurantUnity(null);
     }
 
-    public RestaurantTable(int id, String identification, RestaurantUnity restaurantUnity) {
+    public RestaurantTable(int id, String identification, String name, RestaurantUnity restaurantUnity) {
         this.id = id;
         this.identification = identification;
+        this.name = name;
         this.restaurantUnity = restaurantUnity;
     }
 
@@ -46,6 +52,14 @@ public class RestaurantTable implements java.io.Serializable {
 
     public void setIdentification(String identification) {
         this.identification = identification;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public RestaurantUnity getRestaurantUnity() {
