@@ -4,5 +4,7 @@ WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
 
 FROM openjdk:17
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
