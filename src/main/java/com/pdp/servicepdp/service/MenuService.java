@@ -4,7 +4,7 @@ import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.Menu;
 import com.pdp.servicepdp.model.dto.MenuDTO;
 import com.pdp.servicepdp.model.dto.MenuResponseDTO;
-import com.pdp.servicepdp.repository.MenuDAO;
+import com.pdp.servicepdp.repository.MenuRepositoy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class MenuService {
-    private final MenuDAO menuDAO;
+    private final MenuRepositoy menuRepositoy;
     private final ItemService itemService;
     private final RestaurantUnityService restaurantUnityService;
 
-    public MenuService(MenuDAO menuDAO, ItemService itemService, RestaurantUnityService restaurantUnityService) {
-        this.menuDAO = menuDAO;
+    public MenuService(MenuRepositoy menuRepositoy, ItemService itemService, RestaurantUnityService restaurantUnityService) {
+        this.menuRepositoy = menuRepositoy;
         this.itemService = itemService;
         this.restaurantUnityService = restaurantUnityService;
     }
@@ -26,7 +26,7 @@ public class MenuService {
     public MenuResponseDTO create(MenuDTO menuDTO) {
         var menu = menuDTOToMenu(menuDTO);
         try {
-            menuDAO.save(menu);
+            menuRepositoy.save(menu);
         } catch (RollbackException e) {
             if(e.getMessage().contains("menu_restaurantunity_id_key"))
                 throw new GlobalException("This unity already have a Menu.", HttpStatus.BAD_REQUEST);
@@ -43,7 +43,7 @@ public class MenuService {
     }
 
     public MenuResponseDTO getMenuByRestaurantUnityId(Integer restaurantUnityId) {
-        var menu = menuDAO.getMenuByRestaurantUnityId(restaurantUnityId);
+        var menu = menuRepositoy.getMenuByRestaurantUnityId(restaurantUnityId);
         if (menu.isEmpty())
             throw new GlobalException("Menu not found", HttpStatus.NOT_FOUND);
         return new MenuResponseDTO(menu.get());

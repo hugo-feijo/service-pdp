@@ -2,25 +2,25 @@ package com.pdp.servicepdp.service;
 
 import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.Category;
-import com.pdp.servicepdp.repository.CategoryDAO;
+import com.pdp.servicepdp.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
-    private final CategoryDAO categoryDAO;
+    private final CategoryRepository categoryRepository;
 
-    public CategoryService(CategoryDAO categoryDAO) {
-        this.categoryDAO = categoryDAO;
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     public Category create(Category category) {
-        categoryDAO.save(category);
+        categoryRepository.save(category);
         return category;
     }
 
     public Category findById(Integer id) {
-        var category = categoryDAO.findById(id);
+        var category = categoryRepository.findById(id);
         if (category.isEmpty())
             throw new GlobalException("Category not found", HttpStatus.NOT_FOUND);
         return category.get();

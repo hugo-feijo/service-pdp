@@ -3,18 +3,18 @@ package com.pdp.servicepdp.service;
 import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.RestaurantTable;
 import com.pdp.servicepdp.model.dto.RestaurantTableDTO;
-import com.pdp.servicepdp.repository.RestaurantTableDAO;
+import com.pdp.servicepdp.repository.RestaurantTableRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RestaurantTableService {
 
-    private final RestaurantTableDAO restaurantTableDAO;
+    private final RestaurantTableRepository restaurantTableRepository;
     private final RestaurantUnityService restaurantUnityService;
 
-    public RestaurantTableService(RestaurantTableDAO restaurantTableDAO, RestaurantUnityService restaurantUnityService) {
-        this.restaurantTableDAO = restaurantTableDAO;
+    public RestaurantTableService(RestaurantTableRepository restaurantTableRepository, RestaurantUnityService restaurantUnityService) {
+        this.restaurantTableRepository = restaurantTableRepository;
         this.restaurantUnityService = restaurantUnityService;
     }
 
@@ -25,12 +25,12 @@ public class RestaurantTableService {
         restaurantTable.setName(restaurantTableDTO.getName());
         restaurantTable.setRestaurantUnity(restaurantUnity);
 
-        restaurantTableDAO.save(restaurantTable);
+        restaurantTableRepository.save(restaurantTable);
         return restaurantTable;
     }
 
     public RestaurantTable findById(Integer id) {
-        var restaurantTable = restaurantTableDAO.findById(id);
+        var restaurantTable = restaurantTableRepository.findById(id);
         if (restaurantTable.isEmpty())
             throw new GlobalException("RestaurantTable not found", HttpStatus.NOT_FOUND);
         return restaurantTable.get();
