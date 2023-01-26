@@ -55,4 +55,10 @@ public class ItemService {
             throw new GlobalException("Item not found", HttpStatus.NOT_FOUND);
         return item.get();
     }
+
+    public void updateStatus(Integer id) {
+        var item = this.findById(id);
+        item.setActive(!item.getActive());
+        itemRepository.save(item);
+    }
 }

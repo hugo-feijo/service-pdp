@@ -31,6 +31,9 @@ public class Item implements java.io.Serializable{
     @OneToMany(mappedBy = "item")
     private Set<ItemPictures> pictures;
 
+    @JoinColumn(name = "active", nullable = false)
+    private Boolean active;
+
     public Item(ItemDTO itemDTO, Category category) {
         this.setId(0);
         this.setTitle(itemDTO.getTitle());
@@ -38,6 +41,7 @@ public class Item implements java.io.Serializable{
         this.setCategory(category);
         this.setValue(itemDTO.getValue());
         this.setPictures(new HashSet<>());
+        this.setActive(true);
     }
 
     public Item() {
@@ -47,14 +51,16 @@ public class Item implements java.io.Serializable{
         this.setDescription("NO DESCRIPTION");
         this.setCategory(null);
         this.setPictures(new HashSet<>());
+        this.setActive(true);
     }
 
-    public Item(int id, String title, Double value, String description, Category category) {
+    public Item(int id, String title, Double value, String description, Category category, Boolean active) {
         this.id = id;
         this.title = title;
         this.value = value;
         this.description = description;
         this.category = category;
+        this.active = active;
     }
 
     public int getId() {
@@ -103,6 +109,14 @@ public class Item implements java.io.Serializable{
 
     public void setPictures(Set<ItemPictures> pictures) {
         this.pictures = pictures;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override

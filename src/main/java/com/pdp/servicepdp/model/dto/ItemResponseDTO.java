@@ -14,16 +14,18 @@ public class ItemResponseDTO implements java.io.Serializable{
     private Double value;
     private String categoryName;
     private Set<String> pictures;
+    private Boolean active;
 
     public ItemResponseDTO() {
     }
 
-    public ItemResponseDTO(Integer id, String title, String description, String categoryName, Set<String> pictures) {
+    public ItemResponseDTO(Integer id, String title, String description, String categoryName, Set<String> pictures, Boolean active) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.categoryName = categoryName;
         this.pictures = pictures;
+        this.active = active;
     }
 
     public ItemResponseDTO(Item item) {
@@ -33,6 +35,7 @@ public class ItemResponseDTO implements java.io.Serializable{
         this.setDescription(item.getDescription());
         this.setCategoryName(item.getCategory().getDescription());
         this.setPictures(item.getPictures().stream().map(itemPictures -> itemPictures.getPicture().getUrl()).collect(Collectors.toSet()));
+        this.setActive(item.getActive());
     }
 
     public Integer getId() {
@@ -81,5 +84,13 @@ public class ItemResponseDTO implements java.io.Serializable{
 
     public void setPictures(Set<String> pictures) {
         this.pictures = pictures;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

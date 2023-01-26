@@ -34,17 +34,28 @@ public class MenuResponseDTO implements Serializable {
     }
 
     private static class CategoryResponseDTO implements Serializable{
+        private Integer id;
         private String name;
         private Set<ItemResponseDTO> items;
 
-        public CategoryResponseDTO(String name, Set<ItemResponseDTO> items) {
+        public CategoryResponseDTO(Integer id, String name, Set<ItemResponseDTO> items) {
+            this.id = id;
             this.name = name;
             this.items = items;
         }
 
         public CategoryResponseDTO(List<Item> value) {
+            this.setId(value.get(0).getCategory().getId());
             this.setName(value.get(0).getCategory().getDescription());
             this.setItems(value.stream().map(ItemResponseDTO::new).collect(Collectors.toSet()));
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
         }
 
         public String getName() {
