@@ -73,5 +73,21 @@ public class MenuResponseDTO implements Serializable {
         public void setItems(Set<ItemResponseDTO> items) {
             this.items = items;
         }
+
+        @Override
+        public String toString() {
+            return "CategoryResponseDTO{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", items=" + items +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "MenuResponseDTO{" +
+                "categories=" + categories +
+                '}';
     }
 }

@@ -28,7 +28,7 @@ public class Item implements java.io.Serializable{
     @JoinColumn(name = "id_category", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
     private Set<ItemPictures> pictures;
 
     @JoinColumn(name = "active", nullable = false)

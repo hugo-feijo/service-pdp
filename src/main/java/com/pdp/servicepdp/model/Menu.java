@@ -15,7 +15,7 @@ public class Menu implements java.io.Serializable{
     @Column(name = "id",nullable = false)
     private int id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Item> items;
 
     @OneToOne

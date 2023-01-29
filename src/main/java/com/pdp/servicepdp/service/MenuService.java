@@ -6,6 +6,7 @@ import com.pdp.servicepdp.model.dto.MenuDTO;
 import com.pdp.servicepdp.model.dto.MenuResponseDTO;
 import com.pdp.servicepdp.repository.MenuRepositoy;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.RollbackException;
@@ -17,10 +18,13 @@ public class MenuService {
     private final ItemService itemService;
     private final RestaurantUnityService restaurantUnityService;
 
-    public MenuService(MenuRepositoy menuRepositoy, ItemService itemService, RestaurantUnityService restaurantUnityService) {
+    private final SimpMessagingTemplate simpMessagingTemplate;
+
+    public MenuService(MenuRepositoy menuRepositoy, ItemService itemService, RestaurantUnityService restaurantUnityService, SimpMessagingTemplate simpMessagingTemplate) {
         this.menuRepositoy = menuRepositoy;
         this.itemService = itemService;
         this.restaurantUnityService = restaurantUnityService;
+        this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
     public MenuResponseDTO create(MenuDTO menuDTO) {
@@ -47,5 +51,11 @@ public class MenuService {
         if (menu.isEmpty())
             throw new GlobalException("Menu not found", HttpStatus.NOT_FOUND);
         return new MenuResponseDTO(menu.get());
+    }
+
+    public MenuResponseDTO updateClientMenu(Integer restaurantUnityId){
+        var menu = this.getMenuByRestaurantUnityId(restaurantUnityId);
+        simpMessagingTemplate.convertAndSendToUser(restaurantUnityId.toString(), "/update", menu);// /menu/1/update
+        return menu;
     }
 }
