@@ -24,7 +24,7 @@ public class ClientRest {
     }
 
     @PutMapping("/{clientId}/inactive")
-    public Client inactiveClient(@PathVariable Integer clientId) {
-        return clientService.inactiveById(clientId);
+    public Client inactiveClient(@PathVariable Integer clientId, @RequestParam Integer orderPadId) {
+        return clientService.inactiveById(clientId, orderPadId);
     }
 }

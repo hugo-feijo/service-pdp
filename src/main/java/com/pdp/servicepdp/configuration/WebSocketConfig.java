@@ -16,8 +16,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/menu", "/restaurant-unity");
-        registry.setUserDestinationPrefix("/restaurant-unity");
+        registry.enableSimpleBroker( "/client");
+        registry.setUserDestinationPrefix("/client");
     }
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {

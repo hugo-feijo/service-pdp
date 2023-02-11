@@ -23,6 +23,7 @@ public class ClientService {
         client.setCpf(clientDTO.getCpf());
         client.setOrderPad(orderPadService.findById(orderPadId));
         clientRepository.save(client);
+        orderPadService.updateOrderPadClient(orderPadId);
         return client;
     }
 
@@ -33,10 +34,11 @@ public class ClientService {
         return client.get();
     }
 
-    public Client inactiveById(Integer clientId) {
+    public Client inactiveById(Integer clientId, Integer orderPadId) {
         var client = this.findById(clientId);
         client.setActive(false);
         clientRepository.save(client);
+        orderPadService.updateOrderPadClient(orderPadId);
         return client;
     }
 }

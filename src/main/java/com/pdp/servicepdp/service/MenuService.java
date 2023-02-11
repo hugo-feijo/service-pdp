@@ -55,7 +55,7 @@ public class MenuService {
 
     public MenuResponseDTO updateClientMenu(Integer restaurantUnityId){
         var menu = this.getMenuByRestaurantUnityId(restaurantUnityId);
-        simpMessagingTemplate.convertAndSendToUser(restaurantUnityId.toString(), "/update", menu);// /menu/1/update
+        simpMessagingTemplate.convertAndSendToUser(restaurantUnityId.toString(), "/restaurant-unity/update", menu);// /client/1/restaurant-unity/update
         return menu;
     }
 }
