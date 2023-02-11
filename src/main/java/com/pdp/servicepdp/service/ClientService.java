@@ -18,6 +18,7 @@ public class ClientService {
     }
 
     public Client create(ClientDTO clientDTO, Integer orderPadId) {
+        checkRequiredParameters(clientDTO);
         var client = new Client();
         client.setName(clientDTO.getName());
         client.setCpf(clientDTO.getCpf());
@@ -25,6 +26,12 @@ public class ClientService {
         clientRepository.save(client);
         orderPadService.updateOrderPadClient(orderPadId);
         return client;
+    }
+
+    private void checkRequiredParameters(ClientDTO clientDTO) {
+        if(clientDTO.getName() == null || clientDTO.getCpf() == null ||
+                clientDTO.getName().isBlank() || clientDTO.getCpf().isBlank())
+            throw new GlobalException("Client name and CPF is required.", HttpStatus.BAD_REQUEST);
     }
 
     public Client findById(Integer id) {
