@@ -2,7 +2,7 @@ package com.pdp.servicepdp.service;
 
 import com.pdp.servicepdp.exception.GlobalException;
 import com.pdp.servicepdp.model.RestaurantTable;
-import com.pdp.servicepdp.model.dto.RestaurantTableDTO;
+import com.pdp.servicepdp.model.dto.RestaurantTableCreationDTO;
 import com.pdp.servicepdp.repository.RestaurantTableRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,11 @@ public class RestaurantTableService {
         this.restaurantUnityService = restaurantUnityService;
     }
 
-    public RestaurantTable create(RestaurantTableDTO restaurantTableDTO) {
+    public RestaurantTable create(RestaurantTableCreationDTO restaurantTableCreationDTO) {
         var restaurantTable = new RestaurantTable();
-        var restaurantUnity = restaurantUnityService.findById(restaurantTableDTO.getRestaurantUnityId());
+        var restaurantUnity = restaurantUnityService.findById(restaurantTableCreationDTO.getRestaurantUnityId());
 
-        restaurantTable.setName(restaurantTableDTO.getName());
+        restaurantTable.setName(restaurantTableCreationDTO.getName());
         restaurantTable.setRestaurantUnity(restaurantUnity);
 
         restaurantTableRepository.save(restaurantTable);

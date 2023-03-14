@@ -9,4 +9,6 @@ import java.util.List;
 public interface OrderPadRepository extends JpaRepository<OrderPad,Integer> {
     @Query("select DISTINCT op from OrderPad op WHERE (op.restaurantTable.id = ?1 OR op.restaurantTable.identification = ?2) AND op.closedAt IS NULL")
     public List<OrderPad> getOpenedOrderPadByTableIdOrTableCode(Integer tableId, String tableCode);
+
+    List<OrderPad> findByRestaurantTableIdAndClosedAtIsNull(Integer id);
 }

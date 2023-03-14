@@ -1,7 +1,7 @@
 package com.pdp.servicepdp.rest;
 
 import com.pdp.servicepdp.model.RestaurantTable;
-import com.pdp.servicepdp.model.dto.RestaurantTableDTO;
+import com.pdp.servicepdp.model.dto.RestaurantTableCreationDTO;
 import com.pdp.servicepdp.service.RestaurantTableService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class RestaurantTableRest {
     }
 
     @PostMapping
-    public ResponseEntity<RestaurantTable> createClient(@RequestBody RestaurantTableDTO restaurantTableDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(restaurantTableService.create(restaurantTableDTO));
+    public ResponseEntity<RestaurantTable> createClient(@RequestBody RestaurantTableCreationDTO restaurantTableCreationDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(restaurantTableService.create(restaurantTableCreationDTO));
     }
 }

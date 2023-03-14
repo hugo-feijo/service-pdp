@@ -1,31 +1,28 @@
 package com.pdp.servicepdp.model.dto;
 
-public class RestaurantTableDTO implements java.io.Serializable{
+import com.pdp.servicepdp.model.OrderPad;
+import com.pdp.servicepdp.model.RestaurantTable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestaurantTableDTO {
+    private Integer id;
+    private String identification;
     private String name;
-    private Integer restaurantUnityId;
+    private List<OrderPadDTO> orderPadOpened;
 
-    public RestaurantTableDTO() {
-    }
-
-    public RestaurantTableDTO(String name, Integer restaurantUnityId) {
-        this.name = name;
-        this.restaurantUnityId = restaurantUnityId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRestaurantUnityId() {
-        return restaurantUnityId;
-    }
-
-    public void setRestaurantUnityId(Integer restaurantUnityId) {
-        this.restaurantUnityId = restaurantUnityId;
+    public RestaurantTableDTO(RestaurantTable restaurantTable, List<OrderPad> orderPads) {
+        this.setId(restaurantTable.getId());
+        this.setName(restaurantTable.getName());
+        this.setIdentification(restaurantTable.getIdentification());
+        this.setOrderPadOpened(orderPads.stream().map(OrderPadDTO::new).toList());
     }
 }
