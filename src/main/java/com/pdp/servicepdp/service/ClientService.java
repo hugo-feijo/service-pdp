@@ -46,6 +46,7 @@ public class ClientService {
         client.setActive(false);
         clientRepository.save(client);
         orderPadService.updateOrderPadClient(orderPadId);
+        orderPadService.closeOrderPadIfNoClient(orderPadId);
         return client;
     }
 }

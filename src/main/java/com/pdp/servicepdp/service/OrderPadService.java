@@ -1,6 +1,7 @@
 package com.pdp.servicepdp.service;
 
 import com.pdp.servicepdp.exception.GlobalException;
+import com.pdp.servicepdp.model.Client;
 import com.pdp.servicepdp.model.OrderPad;
 import com.pdp.servicepdp.model.dto.ClientDTO;
 import com.pdp.servicepdp.model.dto.OrderPadDTO;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,8 +55,17 @@ public class OrderPadService {
         return orderPad.get();
     }
 
+    public void closeOrderPadIfNoClient(Integer orderPadId) {
+        var orderPad = findById(orderPadId);
+        var clientsActive = orderPad.getClients().stream().filter(Client::getActive).collect(Collectors.toSet());
+        if(clientsActive.isEmpty()) {
+            orderPad.setClosedAt(LocalDateTime.now());
+            orderPadRepository.save(orderPad);
+        }
+    }
+
     public Set<ClientDTO> updateOrderPadClient(Integer orderPadId) {
-        var clients = findById(orderPadId).getClients().stream().map(ClientDTO::new).collect(Collectors.toSet());
+        var clients = findById(orderPadId).getClients().stream().filter(Client::getActive).map(ClientDTO::new).collect(Collectors.toSet());
         return updateOrderPadClient(clients, orderPadId);
     }
 
