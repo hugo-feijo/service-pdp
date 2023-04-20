@@ -17,7 +17,7 @@ public class MenuController {
     }
 
     @MessageMapping("/menu")
-    MenuResponseDTO gettingMenu(@Payload MenuRequest menuRequest) throws InterruptedException {
+    MenuResponseDTO gettingMenu(@Payload MenuRequest menuRequest){
         return menuService.updateClientMenu(menuRequest.restaurantUnityId());
     }
 }

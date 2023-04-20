@@ -7,6 +7,7 @@ import com.pdp.servicepdp.model.dto.SolicitationDTO;
 import com.pdp.servicepdp.repository.ClientsSolicitationRepository;
 import com.pdp.servicepdp.repository.ItemsSolicitationRepositoy;
 import com.pdp.servicepdp.repository.SolicitationRepository;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,20 +21,27 @@ public class SolicitationService {
     private final ItemsSolicitationRepositoy itemsSolicitationRepositoy;
     private final ClientService clientService;
     private final ItemService itemService;
+    private final OrderPadService orderPadService;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
-    public SolicitationService(SolicitationRepository solicitationRepository, ClientsSolicitationRepository clientsSolicitationRepository, ItemsSolicitationRepositoy itemsSolicitationRepositoy, ClientService clientService, ItemService itemService) {
+    public SolicitationService(SolicitationRepository solicitationRepository, ClientsSolicitationRepository clientsSolicitationRepository,
+                               ItemsSolicitationRepositoy itemsSolicitationRepositoy, ClientService clientService, ItemService itemService,
+                               OrderPadService orderPadService, SimpMessagingTemplate simpMessagingTemplate) {
         this.solicitationRepository = solicitationRepository;
         this.clientsSolicitationRepository = clientsSolicitationRepository;
         this.itemsSolicitationRepositoy = itemsSolicitationRepositoy;
         this.clientService = clientService;
         this.itemService = itemService;
+        this.orderPadService = orderPadService;
+        this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
     public String create(SolicitationDTO solicitationDTO) {
         var solicitation = new Solicitation();
+        solicitation.setOrderPad(orderPadService.findById(solicitationDTO.orderPad()));
         solicitationRepository.save(solicitation);
-        var clients = solicitationDTO.getClientsId().stream().map(clientService::findById).collect(Collectors.toSet());
-        var items = solicitationDTO.getItemsId().stream().map(itemService::findById).collect(Collectors.toSet());
+        var clients = solicitationDTO.clientsId().stream().map(clientService::findById).collect(Collectors.toSet());
+        var items = solicitationDTO.itemsId().stream().map(itemService::findById).collect(Collectors.toSet());
         var clientsSolicitation = new HashSet<ClientsSolicitation>();
         var itemsSolicitation = new HashSet<ItemsSolicitation>();
         items.forEach(item -> {
@@ -49,10 +57,18 @@ public class SolicitationService {
 
         solicitation.setItems(itemsSolicitation);
         solicitation.setClientsSolicitation(clientsSolicitation);
+        getSolicitations(solicitation.getOrderPad().getRestaurantTable().getRestaurantUnity().getId());
         return "Solicitation created with success";
     }
 
     public List<Solicitation> getSolicitationsByClientId(Integer clientId) {
         return solicitationRepository.findByClientId(clientId);
     }
+
+    public List<Solicitation> getSolicitations(Integer restaurantUnity) {
+        var solicitations = solicitationRepository.findByOrderPadRestaurantTableRestaurantUnityId(restaurantUnity);
+        simpMessagingTemplate.convertAndSendToUser(restaurantUnity.toString(), "/solicitation/update", solicitations);// /client/1/solicitation/update
+        return solicitations;
+    }
+
 }

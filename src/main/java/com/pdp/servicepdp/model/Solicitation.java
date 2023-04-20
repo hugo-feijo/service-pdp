@@ -1,11 +1,18 @@
 package com.pdp.servicepdp.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 @Table(name = "SOLICITATION")
 public class Solicitation implements java.io.Serializable{
@@ -20,10 +27,15 @@ public class Solicitation implements java.io.Serializable{
     @Column(name = "delivered_at")
     private LocalDateTime deliveredAt;
 
-    @OneToMany(mappedBy = "solicitation")
+    @ManyToOne
+    @JoinColumn(name = "id_order_pad",nullable = false)
+    private OrderPad orderPad;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "solicitation")
     private Set<ItemsSolicitation> items;
 
-    @OneToMany(mappedBy = "solicitation")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "solicitation")
     private Set<ClientsSolicitation> clientsSolicitation;
 
     public Solicitation() {
@@ -31,55 +43,6 @@ public class Solicitation implements java.io.Serializable{
         this.setSolicitedAt(LocalDateTime.now());
         this.setItems(new HashSet<>());
         this.setClientsSolicitation(new HashSet<>());
-    }
-
-    public Solicitation(int id, LocalDateTime solicitedAt, LocalDateTime deliveredAt, Set<ItemsSolicitation> items,
-                        Set<ClientsSolicitation> clientsSolicitation) {
-        this.id = id;
-        this.solicitedAt = solicitedAt;
-        this.deliveredAt = deliveredAt;
-        this.items = items;
-        this.clientsSolicitation = clientsSolicitation;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getSolicitedAt() {
-        return solicitedAt;
-    }
-
-    public void setSolicitedAt(LocalDateTime solicitedAt) {
-        this.solicitedAt = solicitedAt;
-    }
-
-    public LocalDateTime getDeliveredAt() {
-        return deliveredAt;
-    }
-
-    public void setDeliveredAt(LocalDateTime deliveredAt) {
-        this.deliveredAt = deliveredAt;
-    }
-
-    public Set<ItemsSolicitation> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<ItemsSolicitation> items) {
-        this.items = items;
-    }
-
-    public Set<ClientsSolicitation> getClientsSolicitation() {
-        return clientsSolicitation;
-    }
-
-    public void setClientsSolicitation(Set<ClientsSolicitation> clientsSolicitation) {
-        this.clientsSolicitation = clientsSolicitation;
     }
 
     @Override
