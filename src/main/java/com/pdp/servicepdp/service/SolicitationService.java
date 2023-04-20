@@ -10,6 +10,7 @@ import com.pdp.servicepdp.repository.SolicitationRepository;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,9 +67,15 @@ public class SolicitationService {
     }
 
     public List<Solicitation> getSolicitations(Integer restaurantUnity) {
-        var solicitations = solicitationRepository.findByOrderPadRestaurantTableRestaurantUnityId(restaurantUnity);
+        var solicitations = solicitationRepository.findByOrderPadRestaurantTableRestaurantUnityIdAndDeliveredAtIsNull(restaurantUnity);
         simpMessagingTemplate.convertAndSendToUser(restaurantUnity.toString(), "/solicitation/update", solicitations);// /client/1/solicitation/update
         return solicitations;
     }
 
+    public void finishSolicitation(Integer solicitationId) {
+        var solicitation = solicitationRepository.findById(solicitationId).get();
+        solicitation.setDeliveredAt(LocalDateTime.now());
+        solicitationRepository.save(solicitation);
+        getSolicitations(solicitation.getOrderPad().getRestaurantTable().getRestaurantUnity().getId());
+    }
 }

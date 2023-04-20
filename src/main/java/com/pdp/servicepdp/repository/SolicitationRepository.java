@@ -10,5 +10,5 @@ public interface SolicitationRepository extends JpaRepository<Solicitation,Integ
     @Query("SELECT s FROM Solicitation s INNER JOIN s.clientsSolicitation cs WHERE cs.client.id = ?1")
     public List<Solicitation> findByClientId(Integer clientId);
 
-    public List<Solicitation> findByOrderPadRestaurantTableRestaurantUnityId(Integer id);
+    public List<Solicitation> findByOrderPadRestaurantTableRestaurantUnityIdAndDeliveredAtIsNull(Integer id);
 }

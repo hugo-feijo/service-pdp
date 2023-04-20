@@ -29,4 +29,10 @@ public class SolicitationRest {
     public List<Solicitation> getSolicitationsByClientId(@PathVariable Integer clientId) {
         return solicitationService.getSolicitationsByClientId(clientId);
     }
+
+    @PutMapping("/{solicitationId}")
+    public ResponseEntity<?> finishSolicitation(@PathVariable Integer solicitationId) {
+        solicitationService.finishSolicitation(solicitationId);
+        return ResponseEntity.ok().build();
+    }
 }
